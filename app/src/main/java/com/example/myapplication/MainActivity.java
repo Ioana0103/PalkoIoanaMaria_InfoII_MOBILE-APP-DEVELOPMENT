@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -32,23 +30,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String sortString(String s) {
-        StringBuilder litereMici = new StringBuilder();
-        StringBuilder litereMari = new StringBuilder();
+        String litereMici = "";
+        String litereMari = "";
 
-        for (char c : s.toCharArray()) {
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
             if (Character.isLowerCase(c)) {
-                litereMici.append(c);
+                litereMici += c;
             } else if (Character.isUpperCase(c)) {
-                litereMari.append(c);
+                litereMari += c;
             }
         }
 
-        char[] mici = litereMici.toString().toCharArray();
-        char[] mari = litereMari.toString().toCharArray();
+        litereMici = sortStringWithoutBuilder(litereMici);
+        litereMari = sortStringWithoutBuilder(litereMari);
 
-        Arrays.sort(mici);
-        Arrays.sort(mari);
+        return litereMici + litereMari;
+    }
 
-        return new String(mici) + new String(mari);
+    private String sortStringWithoutBuilder(String s) {
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = i + 1; j < chars.length; j++) {
+                if (chars[i] > chars[j]) {
+                    char temp = chars[i];
+                    chars[i] = chars[j];
+                    chars[j] = temp;
+                }
+            }
+        }
+        return new String(chars);
     }
 }
