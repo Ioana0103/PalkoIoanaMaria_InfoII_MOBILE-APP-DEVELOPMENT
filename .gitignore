@@ -1,7 +1,0 @@
-# Ignoră fișierele generate de Android Studio
-.idea/
-*.iml
-build/
-
-# Nu ignora src/
-!src/
