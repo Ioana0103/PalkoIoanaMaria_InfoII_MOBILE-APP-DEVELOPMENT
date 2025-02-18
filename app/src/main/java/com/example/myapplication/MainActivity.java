@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,13 +25,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputText.getText().toString();
-
                 String sortedString = sortString(input);
-
                 outputText.setText(sortedString);
             }
         });
     }
+
     private String sortString(String s) {
         StringBuilder litereMici = new StringBuilder();
         StringBuilder litereMari = new StringBuilder();
@@ -41,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
                 litereMari.append(c);
             }
         }
-        return litereMici.toString() + litereMari.toString();
+
+        char[] mici = litereMici.toString().toCharArray();
+        char[] mari = litereMari.toString().toCharArray();
+
+        Arrays.sort(mici);
+        Arrays.sort(mari);
+
+        return new String(mici) + new String(mari);
     }
 }
