@@ -1,7 +1,6 @@
 package com.example.valleycounter;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         TextView resultTextView = findViewById(R.id.resultTextView);
 
         calculateButton.setOnClickListener(v -> {
-            String path = pathEditText.getText().toString();
+            String path = pathEditText.getText().toString().trim();
 
             if (path.isEmpty()) {
                 resultTextView.setText("Te rog sa introduci un traseu!");
@@ -29,12 +28,20 @@ public class MainActivity extends AppCompatActivity {
 
             int valleyCount = countValleys(path);
 
-            resultTextView.setText("Numarul de vai: " + valleyCount);
+            if (valleyCount == -1) {
+                resultTextView.setText("Traseul e invalid");
+            } else {
+                resultTextView.setText("Numarul de vai: " + valleyCount);
+            }
         });
     }
 
-    public static int countValleys(String path) {
-        int valleys = 0;
+    public int countValleys(String path) {
+        if (path.charAt(0) == 'D' || path.charAt(path.length() - 1) == 'D') {
+            return -1;
+        }
+
+        int valleys = -1;
         int level = 0;
         boolean inValley = false;
 
@@ -42,18 +49,16 @@ public class MainActivity extends AppCompatActivity {
             char step = path.charAt(i);
 
             if (step == 'U') {
-                level++;
-            } else if (step == 'D') {
                 level--;
-            }
-
-            if (level == 0 && step == 'U' && inValley) {
-                valleys++;
-                inValley = false;
-            }
-
-            if (level < 0 && !inValley) {
-                inValley = true;
+                if (level < 0 && !inValley) {
+                    inValley = true;
+                }
+            } else if (step == 'D') {
+                level++;
+                if (level == 0 && inValley) {
+                    valleys++;
+                    inValley = false;
+                }
             }
         }
 
