@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <Button android:id="@+id/btnChapter1" android:text="Cap. 1"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+    <Button android:id="@+id/btnChapter2" android:text="Cap. 2"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+    <Button android:id="@+id/btnChapter3" android:text="Cap. 3"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+    <Button android:id="@+id/btnChapter4" android:text="Cap. 4"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>
